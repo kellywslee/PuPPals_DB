@@ -12,7 +12,7 @@ The purpose of PupPals’s database is to gather information from dog owners and
 
 ## Mission Objectives
 - Allow users to create, manage, and update their dogs’ profiles
-- Allow users to browse and search dog profiles based on size, location, and energy level.
+- Allow users to browse and search other dogs' profiles
 - Provide tools for adding other dogs to a friend list
 - Enable users to send and receive messages to other dog owners within the app
 
