@@ -1,4 +1,4 @@
-# PupPals -Database Design
+# PupPals - Database Design
 YorkU Full Stack Program FS1030 Project
 
 ## Find doggie playdates at PupPals!
