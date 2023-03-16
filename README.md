@@ -17,6 +17,11 @@ The purpose of PupPals’s database is to gather information from dog owners and
 - Enable users to send and receive messages to other dog owners within the app
 
 ## Entity Relationship Model
+Entities:
+- User
+- Dog
+- Friendship
+- Message
 
 ## Entity Relationship Diagram
 
