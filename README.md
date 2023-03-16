@@ -23,6 +23,10 @@ Entities:
 - Friendship
 - Message
 
+Relationships:
+- A user may have one or more dogs (1:N); A dog must belong to only one user (1:1).
+
+
 ## Entity Relationship Diagram
 
 ## Relational Model
