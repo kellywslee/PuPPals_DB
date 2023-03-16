@@ -26,16 +26,16 @@ Entities:
 Relationships:
 - A user may have one or more dogs; A dog must belong to one and only one user.
 - A dog may follow one or more dogs; A dog may be followed by one or more dogs.
-- A user may send one or more messages; A message must belong to one and only one User
+- A dog may send one or more messages; A message must belong to one and only one dog.
 
 
 ## Entity Relationship Diagram
 https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=sharing
-![image](https://user-images.githubusercontent.com/76071382/225703088-9228a4d1-308a-49df-995c-8ab15fb6bbae.png)
+![image](https://user-images.githubusercontent.com/76071382/225704912-86f36806-4d4c-4f6e-a5cd-1614c794db03.png)
 
 
 ## Relational Model
 - **user** (user_id(pk), email, password, signup_date, account_status)
-- **dog_profile** (dog_id(pk), user_id(fk), dog_name, breed, sex, date_of_birth, weight, energy_level, dog_owner_first_name, profile_message, dog_profile_status)
+- **dog** (dog_id(pk), user_id(fk), dog_name, breed, sex, date_of_birth, weight, energy_level, dog_owner_first_name, profile_message, dog_profile_status)
 - **friendship** (followee_dog_id(fk), follower_dog_id(fk))
 - **message** (message_id(pk), sender_dog_id(fk), receiver_dog_id(fk), message_text, timestamp)
