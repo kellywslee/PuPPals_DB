@@ -24,7 +24,9 @@ Entities:
 - Message
 
 Relationships:
-- A user may have one or more dogs (1:N); A dog must belong to only one user (1:1).
+- A user may have one or more dogs; A dog must belong to one and only one user.
+- A dog may follow one or more dogs; A dog may be followed by one or more dogs.
+- A user may send one or more messages; A message must belong to one and only one User
 
 
 ## Entity Relationship Diagram
