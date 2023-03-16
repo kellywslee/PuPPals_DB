@@ -35,7 +35,7 @@ https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=shari
 
 
 ## Relational Model
-1. user: user_id(pk), email, password, signup_date, account_status
-2. dog_profile: dog_id(pk), user_id(fk), dog_name, breed, sex, date_of_birth, weight, energy_level, dog_owner_first_name, profile_message, dog_profile_status
-3. friendship: followee_dog_id(fk), follower_dog_id(fk)
-4. message: message_id(pk), sender_dog_id(fk), receiver_dog_id(fk), message_text, timestamp
+1. **user**: user_id, email, password, signup_date, account_status
+2. **dog_profile**: dog_id(pk), user_id(fk), dog_name, breed, sex, date_of_birth, weight, energy_level, dog_owner_first_name, profile_message, dog_profile_status
+3. **friendship**: followee_dog_id(fk), follower_dog_id(fk)
+4. **message**: message_id(pk), sender_dog_id(fk), receiver_dog_id(fk), message_text, timestamp
