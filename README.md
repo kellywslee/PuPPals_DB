@@ -31,10 +31,11 @@ Relationships:
 
 ## Entity Relationship Diagram
 https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=sharing
-![image](https://user-images.githubusercontent.com/76071382/225709659-fb10e61a-6771-4bc5-9960-82bcdb5fc5bb.png)
+![image](https://user-images.githubusercontent.com/76071382/225729705-cbd05683-3adc-4e70-b869-5a369ca10617.png)
+
 
 ## Relational Model
 - **user** (user_id(pk), email, password, signup_date, account_status)
-- **dog** (dog_id(pk), user_id(fk), dog_name, breed, sex, date_of_birth, weight, postal_code, dog_owner_first_name, energy_level, profile_message, dog_profile_status)
+- **dog** (dog_id(pk), user_id(fk), dog_name, photo, breed, sex, date_of_birth, weight, postal_code, dog_owner_first_name, energy_level, profile_message, dog_profile_status)
 - **friendship** (followee_dog_id(fk), follower_dog_id(fk))
 - **message** (message_id(pk), sender_dog_id(fk), receiver_dog_id(fk), message_text, timestamp)
