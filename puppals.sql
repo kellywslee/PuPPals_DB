@@ -1,0 +1,5 @@
+CREATE DATABASE puppals;
+CREATE TABLE puppals.user(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  email VARCHAR(255)
+);
