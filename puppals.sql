@@ -21,5 +21,7 @@ postal_code VARCHAR(7) NOT NULL,
 energy_level ENUM('Low', 'Moderate', 'High') NOT NULL,
 owner_first_name VARCHAR(20) NOT NULL,
 profile_message VARCHAR(150),
+created_at TIMESTAMP NOT NULL,
+updated_at TIMESTAMP NOT NULL,
 FOREIGN KEY (user_id) REFERENCES user(id)
 );
