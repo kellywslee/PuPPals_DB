@@ -25,3 +25,5 @@ created_at TIMESTAMP NOT NULL,
 updated_at TIMESTAMP NOT NULL,
 FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
+CREATE TABLE friendship (
