@@ -37,7 +37,9 @@ https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=shari
 ![image](https://user-images.githubusercontent.com/76071382/225780728-df1d7db1-b2fd-4dee-b651-1a140d5d16f3.png)
 
 ## Relational Model
-- **user** (user_id(pk), email, password, signup_date, account_status)
-- **dog** (dog_id(pk), user_id(fk), dog_name, photo, breed, sex, date_of_birth, weight, postal_code, dog_owner_first_name, energy_level, profile_message, dog_profile_status)
-- **friendship** (followee_dog_id(fk), follower_dog_id(fk))
-- **message** (message_id(pk), sender_dog_id(fk), receiver_dog_id(fk), message_text, timestamp)
+- **user** (user_id(pk), email, password, created_at, updated_at, is_active)
+- **dog** (dog_id(pk), user_id(fk), dog_name, photo, breed, sex, date_of_birth, weight, postal_code, dog_owner_first_name, energy_level, profile_message, created_at, updated_at, is_active)
+- **friendship** (followee_dog_id(fk), follower_dog_id(fk), created_at, updated_at)
+- **chat** (chat_id (pk), chat_name, is_active, created_at)
+- **chat_participants** (chat_id (fk), dog_id (fk))
+- **message** (message_id (pk), chat_id (fk), sender_dog_id (fk), message_text, created_at)
