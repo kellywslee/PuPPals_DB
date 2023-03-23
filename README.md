@@ -22,12 +22,15 @@ Entities:
 - User
 - Dog
 - Friendship
+- Chat
+- Chat_Participants
 - Message
 
 Relationships:
 - A user may have one or more dogs; A dog must belong to one and only one user.
 - A dog may follow one or more dogs; A dog may be followed by one or more dogs.
-- A dog may send one or more messages; A message must belong to one and only one dog.
+- A chat may have two or more participants; A dog may participate in one or more chats.
+- A chat may have one or more messages; A message must belong to one and only one chat.
 
 ## Entity Relationship Diagram
 https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=sharing
