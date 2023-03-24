@@ -42,4 +42,4 @@ https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=shari
 - **follow** (followee_dog_id(fk), follower_dog_id(fk), created_at, updated_at)
 - **chat** (chat_id (pk), chat_name, created_at, is_active)
 - **chat_participants** (chat_id (fk), dog_id (fk))
-- **message** (message_id (pk), chat_id (fk), sender_dog_id (fk), message_text, created_at)
+- **message** (message_id (pk), chat_id (fk), sender_dog_id (fk), content, created_at)
