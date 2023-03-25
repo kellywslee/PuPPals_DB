@@ -22,13 +22,13 @@ Entities:
 - User
 - Dog
 - Follow
-- Chat
 - Message
+- Chat
 
 Relationships:
 - A user may have one or more dogs; A dog must belong to one and only one user.
 - A dog may follow one or more dogs; A dog may be followed by one or more dogs.
-- A chat may have two or more dogs; A dog may participate in one or more chats.
+- A dog may send one or more messages; A message must belong to one and only one dog.
 - A chat may have one or more messages; A message must belong to one and only one chat.
 
 ## Entity Relationship Diagram
@@ -39,5 +39,6 @@ https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=shari
 - **user** (user_id(pk), email, password, created_at, updated_at, is_active)
 - **dog** (dog_id(pk), user_id(fk), name, photo, breed, sex, date_of_birth, weight, postal_code, energy_level, dog_owner_first_name, profile_message, created_at, updated_at, is_active)
 - **follow** (follow_id(pk), followee_dog_id(fk), follower_dog_id(fk), created_at, updated_at)
+- **message** (message_id (pk), dog_id (fk), chat_id (fk), content, created_at)
 - **chat** (chat_id (pk), chat_name, created_at, is_active)
-- **message** (message_id (pk), chat_id (fk), dog_id (fk), content, created_at)
+
