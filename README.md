@@ -6,7 +6,7 @@ PupPals is a social platform designed to connect dog owners and their dogs for p
 
 ## Figma Design Link:
 https://www.figma.com/file/HaMJbXliECEywGZ3WAd5gr/PupPals?node-id=0%3A1&t=JVUmwWMKJY4v9ocW-1
-![image](https://user-images.githubusercontent.com/76071382/227738122-9a1c8cd7-2e14-4aef-b33a-ff3b4bdb1613.png)
+![Screenshot 2023-03-16 135525](https://user-images.githubusercontent.com/76071382/227738179-431f3161-f2de-4acd-b769-636fcacbcc51.png)
 
 ## Mission Statement
 The purpose of PupPals’s database is to gather information from dog owners and generate profiles of their dogs and make it available to other users of the app so that they can find suitable playdates for their dogs.
@@ -33,7 +33,7 @@ Relationships:
 
 ## Entity Relationship Diagram
 https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=sharing
-![image](https://user-images.githubusercontent.com/76071382/227398053-353124b7-5926-49ac-8e10-47e1bd82f6b6.png)
+![image](https://user-images.githubusercontent.com/76071382/227738154-2a4d58f8-5f7e-447c-ba73-ae9dad089f80.png)
 
 ## Relational Model
 - **user** (user_id(pk), email, password, created_at, updated_at, is_active)
