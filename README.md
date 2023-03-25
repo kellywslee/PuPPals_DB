@@ -33,7 +33,7 @@ Relationships:
 
 ## Entity Relationship Diagram
 https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=sharing
-![image](https://user-images.githubusercontent.com/76071382/227738154-2a4d58f8-5f7e-447c-ba73-ae9dad089f80.png)
+![image](https://user-images.githubusercontent.com/76071382/227738428-380a9b63-8972-4bd2-815e-52e6d0f0de07.png)
 
 ## Relational Model
 - **user** (user_id(pk), email, password, created_at, updated_at, is_active)
