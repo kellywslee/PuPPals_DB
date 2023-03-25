@@ -23,7 +23,6 @@ Entities:
 - Dog
 - Follow
 - Chat
-- Chat_Participants
 - Message
 
 Relationships:
@@ -39,7 +38,6 @@ https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=shari
 ## Relational Model
 - **user** (user_id(pk), email, password, created_at, updated_at, is_active)
 - **dog** (dog_id(pk), user_id(fk), name, photo, breed, sex, date_of_birth, weight, postal_code, energy_level, dog_owner_first_name, profile_message, created_at, updated_at, is_active)
-- **follow** (followee_dog_id(fk), follower_dog_id(fk), created_at, updated_at)
+- **follow** (follow_id(pk), followee_dog_id(fk), follower_dog_id(fk), created_at, updated_at)
 - **chat** (chat_id (pk), chat_name, created_at, is_active)
-- **chat_participants** (chat_id (fk), dog_id (fk))
-- **message** (message_id (pk), chat_id (fk), sender_dog_id (fk), content, created_at)
+- **message** (message_id (pk), chat_id (fk), dog_id (fk), content, created_at)
