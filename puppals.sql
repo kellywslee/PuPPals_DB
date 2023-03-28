@@ -148,3 +148,6 @@ VALUES
   INSERT INTO puppals.chat (chat_name, is_active)
   VALUES ('doggie friends', '1');
   DELETE FROM puppals.chat WHERE chat_id = 5;
+  
+  ALTER TABLE puppals.message
+  MODIFY COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
