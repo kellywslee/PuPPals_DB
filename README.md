@@ -42,4 +42,6 @@ https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=shari
 - **chat** (chat_id (pk), chat_name, created_at, updated_at, is_active)
 - **message** (message_id (pk), dog_id (fk), chat_id (fk), content, created_at)
 
+EER Diagram
+![image](https://user-images.githubusercontent.com/76071382/228967305-2069d660-54ae-4af2-8522-28e2f0d5c19d.png)
 
