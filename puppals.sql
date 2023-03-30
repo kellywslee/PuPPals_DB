@@ -1,16 +1,17 @@
 CREATE DATABASE puppals;
 
 CREATE TABLE puppals.user (
-  user_id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT AUTO_INCREMENT,
   email VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  is_active TINYINT(1) DEFAULT 1 NOT NULL
+  is_active TINYINT(1) DEFAULT 1 NOT NULL,
+  PRIMARY KEY (user_id)
 );
 
 CREATE TABLE puppals.dog (
-  dog_id INT PRIMARY KEY AUTO_INCREMENT,
+  dog_id INT AUTO_INCREMENT,
   user_id INT NOT NULL,
   name VARCHAR(30) NOT NULL,
   photo VARCHAR(255) NOT NULL,
@@ -21,39 +22,49 @@ CREATE TABLE puppals.dog (
   postal_code VARCHAR(7) NOT NULL,
   energy_level ENUM('Low', 'Moderate', 'High') NOT NULL,
   dog_owner_first_name VARCHAR(20) NOT NULL,
-  profile_message VARCHAR(150) NOT NULL,
+  profile_message VARCHAR(200) NOT NULL DEFAULT 'Hello',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   is_active TINYINT(1) DEFAULT 1,
-  FOREIGN KEY (user_id) REFERENCES user(user_id)
+  PRIMARY KEY (dog_id),
+  CONSTRAINT fk_dog_user_id
+  FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE puppals.follow (
-  follow_id INT PRIMARY KEY AUTO_INCREMENT,
+  follow_id INT AUTO_INCREMENT,
   followee_dog_id INT NOT NULL,
   follower_dog_id INT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (followee_dog_id) REFERENCES dog(dog_id),
-  FOREIGN KEY (follower_dog_id) REFERENCES dog(dog_id)
+  PRIMARY KEY (follow_id),
+  CONSTRAINT fk_follow_followee_dog_id
+  FOREIGN KEY (followee_dog_id) REFERENCES dog(dog_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_follow_follower_dog_id
+  FOREIGN KEY (follower_dog_id) REFERENCES dog(dog_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE puppals.chat (
-  chat_id INT PRIMARY KEY AUTO_INCREMENT,
+  chat_id INT AUTO_INCREMENT,
   chat_name VARCHAR(30) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  is_active TINYINT(1) DEFAULT 1
+  is_active TINYINT(1) DEFAULT 1,
+  PRIMARY KEY (chat_id)
 );
 
 CREATE TABLE puppals.message (
-  message_id INT PRIMARY KEY AUTO_INCREMENT,
-  dog_id INT NOT NULL,
+  message_id INT AUTO_INCREMENT,
+  dog_id INT,
   chat_id INT NOT NULL,
   content TEXT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (dog_id) REFERENCES dog(dog_id),
-  FOREIGN KEY (chat_id) REFERENCES chat(chat_id)
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (message_id),
+  CONSTRAINT fk_message_dog_id
+  FOREIGN KEY (dog_id) REFERENCES dog(dog_id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_message_chat_id
+  FOREIGN KEY (chat_id) REFERENCES chat(chat_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO puppals.user (email, password, is_active)
@@ -68,7 +79,7 @@ VALUES
   ('frank.demo@gmail.com', '1235', '1'),
   ('george.demo@gmail.com', '1212', '1'),
   ('harry.demo@gmail.com', '0909', '1');
-  
+
 INSERT INTO puppals.dog
   (user_id, name, photo, breed, sex, date_of_birth, weight, postal_code, energy_level, dog_owner_first_name, profile_message, is_active)
 VALUES 
@@ -85,13 +96,13 @@ VALUES
   ('9', 'Lola', 'www.photostoragedemo.com', 'Shihpoo', 'F', '2022-04-01', '12', 'M5A1L4', 'High', 'George', 'Hello there!', '1'),
   ('10', 'Bailey', 'www.photostoragedemo.com', 'Yorkie', 'M', '2020-04-01', '10', 'M5R2P1', 'High', 'Harry', 'Hello there!', '1'), 
   ('10', 'Brown', 'www.photostoragedemo.com', 'Husky', 'M', '2019-05-01', '40', 'M5RSP1', 'High', 'Harry', 'Hello there!', '1');
-  
+
 INSERT INTO puppals.follow (followee_dog_id, follower_dog_id)
 VALUES
   ('1', '5'),
   ('1', '6'),
   ('1', '8'),
-  ('2', '4'),
+  ('2', '1'),
   ('2', '6'),
   ('2', '5'),
   ('3', '1'),
@@ -128,3 +139,5 @@ VALUES
   ('5', '2', 'Hi Buncha'),
   ('4', '3', 'hi everyone'),
   ('10', '3', 'hello there');
+  
+  
