@@ -40,7 +40,7 @@ https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=shari
 - **dog** (dog_id(pk), user_id(fk), name, photo, breed, sex, date_of_birth, weight, postal_code, energy_level, dog_owner_first_name, profile_message, created_at, updated_at, is_active)
 - **follow** (follow_id(pk), followee_dog_id(fk), follower_dog_id(fk), created_at, updated_at)
 - **chat** (chat_id (pk), chat_name, created_at, updated_at, is_active)
-- **message** (message_id (pk), dog_id (fk), chat_id (fk), content, created_at)
+- **message** (message_id (pk), dog_id (fk), chat_id (fk), content, created_at, updated_at)
 
 EER Diagram
 ![image](https://user-images.githubusercontent.com/76071382/228967305-2069d660-54ae-4af2-8522-28e2f0d5c19d.png)
