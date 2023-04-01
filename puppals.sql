@@ -140,4 +140,30 @@ VALUES
   ('4', '3', 'hi everyone'),
   ('10', '3', 'hello there');
   
+-- Scripts (Assignment 2) Create scripts to insert, update, select and delete values in at least two tables.
+
+INSERT INTO puppals.user (email, password, is_active)
+VALUES ('dorothy.demo@gmail.com', 'mypassword', '1');
+
+INSERT INTO puppals.dog (user_id, name, photo, breed, sex, date_of_birth, weight, postal_code, energy_level, dog_owner_first_name, profile_message, is_active)
+VALUES ('11', 'Miska', 'www.photostoragedemo.com', 'Husky', 'M', '2015-05-01', '60', 'M5A1T7', 'Low', 'Dorothy', 'Hello there!', '1');
+
+INSERT INTO puppals.follow (followee_dog_id, follower_dog_id)
+VALUES
+  ('14', '5');
+
+INSERT INTO puppals.chat (chat_name, is_active)
+VALUES
+  ('Go Huskies', '1');
+
+INSERT INTO puppals.message (dog_id, chat_id, content)
+VALUES
+  ('14', '5', 'Hello, My name is Miska'),
+  ('13', '5', 'Hello, Miska');
+
+UPDATE puppals.dog SET weight = '62' WHERE dog_id = 14;
+UPDATE puppals.chat SET chat_name = 'Gogogo Huskies' WHERE chat_id = 5;
+
+DELETE FROM puppals.message WHERE dog_id = 13;
+DELETE FROM puppals.dog WHERE dog_id = 14; -- NULL on dog_id
   
