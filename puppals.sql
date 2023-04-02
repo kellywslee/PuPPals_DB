@@ -7,6 +7,7 @@ CREATE TABLE puppals.user (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   is_active TINYINT(1) DEFAULT 1 NOT NULL,
+  is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
   PRIMARY KEY (user_id)
 );
 
@@ -25,7 +26,8 @@ CREATE TABLE puppals.dog (
   profile_message VARCHAR(200) NOT NULL DEFAULT 'Hello',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  is_active TINYINT(1) DEFAULT 1,
+  is_active TINYINT(1) DEFAULT 1 NOT NULL,
+  is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
   PRIMARY KEY (dog_id),
   CONSTRAINT fk_dog_user_id
   FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -37,6 +39,7 @@ CREATE TABLE puppals.follow (
   follower_dog_id INT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
   PRIMARY KEY (follow_id),
   CONSTRAINT fk_follow_followee_dog_id
   FOREIGN KEY (followee_dog_id) REFERENCES dog(dog_id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -49,7 +52,7 @@ CREATE TABLE puppals.chat (
   chat_name VARCHAR(30) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  is_active TINYINT(1) DEFAULT 1,
+  is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
   PRIMARY KEY (chat_id)
 );
 
@@ -60,11 +63,27 @@ CREATE TABLE puppals.message (
   content TEXT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
   PRIMARY KEY (message_id),
   CONSTRAINT fk_message_dog_id
   FOREIGN KEY (dog_id) REFERENCES dog(dog_id) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT fk_message_chat_id
   FOREIGN KEY (chat_id) REFERENCES chat(chat_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE puppals.dog_chat (
+  dog_chat_id INT AUTO_INCREMENT,
+  dog_id INT,
+  chat_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
+  PRIMARY KEY (dog_chat_id),
+  CONSTRAINT fk_dog_chat_dog_id
+  FOREIGN KEY (dog_id) REFERENCES dog(dog_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_dog_chat_chat_id
+  FOREIGN KEY (chat_id) REFERENCES chat(chat_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  UNIQUE (dog_id, chat_id)
 );
 
 INSERT INTO puppals.user (email, password, is_active)
@@ -123,12 +142,12 @@ VALUES
   ('12', '10'),
   ('13', '10');
 
-INSERT INTO puppals.chat (chat_name, is_active)
+INSERT INTO puppals.chat (chat_name)
 VALUES
-  ('Hyde Park Furiends', '1'),
-  ('Buncha and Ziggy', '1'),
-  ('Small doggos club', '1'),
-  ('Big Buddies', '0');
+  ('Hyde Park Furiends'),
+  ('Buncha and Ziggy'),
+  ('Small doggos club'),
+  ('Big Buddies');
 
 INSERT INTO puppals.message (dog_id, chat_id, content)
 VALUES
@@ -139,8 +158,18 @@ VALUES
   ('5', '2', 'Hi Buncha'),
   ('4', '3', 'hi everyone'),
   ('10', '3', 'hello there');
-  
--- Scripts (Assignment 2) Create scripts to insert, update, select and delete values in at least two tables.
+
+INSERT INTO puppals.dog_chat (dog_id, chat_id)
+VALUES
+  ('11', '1'),
+  ('12', '1'),
+  ('3', '1'),
+  ('1', '2'),
+  ('5', '2'),
+  ('4', '3'),
+  ('10', '3');
+
+-- Inserting Extra Data
 
 INSERT INTO puppals.user (email, password, is_active)
 VALUES ('dorothy.demo@gmail.com', 'mypassword', '1');
@@ -152,18 +181,169 @@ INSERT INTO puppals.follow (followee_dog_id, follower_dog_id)
 VALUES
   ('14', '5');
 
-INSERT INTO puppals.chat (chat_name, is_active)
+INSERT INTO puppals.chat (chat_name)
 VALUES
-  ('Go Huskies', '1');
+  ('Go Huskies');
 
 INSERT INTO puppals.message (dog_id, chat_id, content)
 VALUES
   ('14', '5', 'Hello, My name is Miska'),
-  ('13', '5', 'Hello, Miska');
+  ('13', '5', 'Hello, Miska'),
+  ('10', '5', 'Whoops! I am not a Husky'),
+  ('13', '5', 'You are still welcomed'),
+  ('13', '5', 'abcde');
+
+INSERT INTO puppals.dog_chat (dog_id, chat_id)
+VALUES
+  ('14', '5'),
+  ('13', '5'),
+  ('10', '5');
+
+-- Updating data
 
 UPDATE puppals.dog SET weight = '62' WHERE dog_id = 14;
 UPDATE puppals.chat SET chat_name = 'Gogogo Huskies' WHERE chat_id = 5;
 
-DELETE FROM puppals.message WHERE dog_id = 13;
-DELETE FROM puppals.dog WHERE dog_id = 14; -- NULL on dog_id
-  
+
+-- To deleted a message (Soft Delete)
+
+UPDATE puppals.message SET is_deleted = '1' WHERE message_id = 12;
+
+-- To display playdates by weight (between 10 - 20 lb)
+
+SELECT 
+  d.name AS "Dog Name",  
+  d.photo AS "Photo",
+  d.breed AS "Breed",  
+  d.sex AS "Sex",
+  TIMESTAMPDIFF(YEAR, d.date_of_birth, NOW()) -
+  CASE
+    WHEN MONTH(d.date_of_birth) > MONTH(NOW()) OR
+         (MONTH(d.date_of_birth) = MONTH(NOW()) AND DAY(d.date_of_birth) > DAY(NOW()))
+    THEN 1
+    ELSE 0
+  END AS "Age",
+  d.weight AS "Weight(lb)",
+  d.postal_code AS "Postal Code",
+  d.energy_level AS "Energy Level",
+  d.dog_owner_first_name AS "Pawrent's Name",
+  d.profile_message AS "Message"
+FROM puppals.dog AS d
+WHERE
+  d.weight BETWEEN 10 AND 20 AND
+  d.is_active = 1
+ORDER BY d.weight;
+
+-- To display playdates by weight & Age (Under 15 lb and less than 2 years old)
+
+SELECT 
+  d.name AS "Dog Name",  
+  d.photo AS "Photo",
+  d.breed AS "Breed",  
+  d.sex AS "Sex",
+  TIMESTAMPDIFF(YEAR, d.date_of_birth, NOW()) -
+  CASE
+    WHEN MONTH(d.date_of_birth) > MONTH(NOW()) OR
+         (MONTH(d.date_of_birth) = MONTH(NOW()) AND DAY(d.date_of_birth) > DAY(NOW()))
+    THEN 1
+    ELSE 0
+  END AS "Age",
+  d.weight AS "Weight(lb)",
+  d.postal_code AS "Postal Code",
+  d.energy_level AS "Energy Level",
+  d.dog_owner_first_name AS "Pawrent's Name",
+  d.profile_message AS "Message"
+FROM puppals.dog AS d
+WHERE
+  d.weight < 15 AND
+  d.is_active = 1 AND
+  TIMESTAMPDIFF(YEAR, d.date_of_birth, NOW()) -
+  CASE
+    WHEN MONTH(d.date_of_birth) > MONTH(NOW()) OR
+         (MONTH(d.date_of_birth) = MONTH(NOW()) AND DAY(d.date_of_birth) > DAY(NOW()))
+    THEN 1
+    ELSE 0
+  END < 2;
+
+-- To find the most followed dog and count # of followers
+
+SELECT
+  d.name AS "Dog Name",
+  COUNT(f.follower_dog_id) AS "Number of Followers"
+FROM puppals.dog AS d
+JOIN puppals.follow AS f 
+  ON d.dog_id = f.followee_dog_id
+WHERE f.is_deleted = 0
+GROUP BY d.dog_id, d.name
+ORDER BY COUNT(f.follower_dog_id) DESC
+LIMIT 1;
+
+-- To find the heaviets dog
+
+SELECT
+  d.name AS "Dog Name",
+  d.weight AS "Weight"
+FROM puppals.dog AS d
+WHERE d.weight = (SELECT MAX(weight) FROM puppals.dog);
+
+-- To view a chat room and messages sent by a dog)
+
+SELECT 
+  c.chat_name AS "Chat Rooms", 
+  d.name AS "Dog Name",  
+  m.content AS "Message",  
+  m.created_at AS "Sent at"
+FROM puppals.chat AS c
+JOIN puppals.message AS m
+  ON c.chat_id = m.chat_id
+JOIN puppals.dog AS d
+  ON m.dog_id = d.dog_id
+WHERE c.chat_id = 5;
+
+-- To find the number of participants for each chat room (LEFT JOIN to display chats with 0 participants)
+
+SELECT 
+  c.chat_name AS "Chat Name",
+  COUNT(dc.dog_id) AS "Number of Chat Participants"
+FROM puppals.chat AS c
+LEFT JOIN puppals.dog_chat AS dc
+  ON dc.chat_id = c.chat_id
+GROUP BY c.chat_id, c.chat_name;
+
+-- To find the chat rooms with more than 2 messages
+
+SELECT
+  c.chat_name AS "Chat Name",
+  COUNT(DISTINCT m.message_id) AS "Number of Messages",
+  COUNT(DISTINCT dc.dog_id) AS "Number of Chat Participants"
+FROM puppals.chat AS c
+JOIN puppals.message AS m
+  ON c.chat_id = m.chat_id
+JOIN puppals.dog_chat AS dc
+  ON c.chat_id = dc.chat_id
+GROUP BY c.chat_id, c.chat_name
+HAVING COUNT(DISTINCT m.message_id) > 2;
+
+-- To show all the chat activity.
+
+SELECT
+  c.chat_name AS "Chat Rooms",
+  d.name AS "Dog Name",
+  CASE
+    WHEN m.is_deleted = 1 THEN 'Deleted message' -- when a message is deleted, it shows "Deleted message"
+    ELSE m.content
+  END AS "Message",
+  m.created_at AS "Sent at",
+  dc.created_at AS "Joined Chat",
+  CASE
+    WHEN dc.is_deleted = 1 THEN dc.updated_at -- leaving a chat
+    ELSE NULL
+  END AS "Left Chat"
+FROM puppals.chat AS c
+JOIN puppals.message AS m
+  ON c.chat_id = m.chat_id
+JOIN puppals.dog AS d
+  ON m.dog_id = d.dog_id
+JOIN puppals.dog_chat AS dc
+  ON dc.dog_id = d.dog_id AND dc.chat_id = c.chat_id
+WHERE c.chat_id = 5;
