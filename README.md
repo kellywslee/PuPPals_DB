@@ -46,5 +46,6 @@ https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=shari
 - **dog_chat** (dog_chat_id (pk), dog_id (fk), chat_id (fk), created_at, updated_at, is_deleted)
 
 ## EER Diagram
-![image](https://user-images.githubusercontent.com/76071382/228967305-2069d660-54ae-4af2-8522-28e2f0d5c19d.png)
+![image](https://user-images.githubusercontent.com/76071382/229328609-d55854b9-fd84-484a-ac03-79ac47ec5cf8.png)
+
 
