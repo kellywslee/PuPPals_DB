@@ -23,7 +23,7 @@ Entities:
 - Dog
 - Follow
 - Chat
-- Dog_Chat
+- Chat_Participant
 - Message
 
 Relationships:
