@@ -319,7 +319,7 @@ JOIN puppals.chat_participant AS cp
 GROUP BY c.chat_id, c.chat_name
 HAVING COUNT(DISTINCT m.message_id) > 2;
 
--- To show all the chat activity.
+-- To show all the chat activities.
 
 SELECT
   c.chat_name AS "Chat Rooms",
