@@ -22,9 +22,9 @@ Entities:
 - User
 - Dog
 - Follow
-- Message
 - Chat
 - Dog_Chat
+- Message
 
 Relationships:
 - A user may have one or more dogs; A dog must belong to one and only one user.
@@ -41,11 +41,12 @@ https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=shari
 - **user** (user_id(pk), email, password, created_at, updated_at, is_active, is_deleted)
 - **dog** (dog_id(pk), user_id(fk), name, photo, breed, sex, date_of_birth, weight, postal_code, energy_level, dog_owner_first_name, profile_message, created_at, updated_at, is_active, is_deleted)
 - **follow** (follow_id(pk), followee_dog_id(fk), follower_dog_id(fk), created_at, updated_at, is_deleted)
-- **message** (message_id (pk), dog_id (fk), chat_id (fk), content, created_at, updated_at, is_deleted)
 - **chat** (chat_id (pk), chat_name, created_at, updated_at, is_deleted)
-- **dog_chat** (dog_chat_id (pk), dog_id (fk), chat_id (fk), created_at, updated_at, is_deleted)
+- **chat_participant** (dog_chat_id (pk), dog_id (fk), chat_id (fk), created_at, updated_at, is_deleted)
+- **message** (message_id (pk), dog_id (fk), chat_id (fk), content, created_at, updated_at, is_deleted)
 
 ## EER Diagram
-![image](https://user-images.githubusercontent.com/76071382/229328609-d55854b9-fd84-484a-ac03-79ac47ec5cf8.png)
+![image](https://user-images.githubusercontent.com/76071382/229387241-a8e42195-b70a-49ff-8bd0-b3d9ff2389ee.png)
+
 
 
