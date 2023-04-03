@@ -56,6 +56,21 @@ CREATE TABLE puppals.chat (
   PRIMARY KEY (chat_id)
 );
 
+CREATE TABLE puppals.chat_participant (
+  chat_participant_id INT AUTO_INCREMENT,
+  dog_id INT,
+  chat_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
+  PRIMARY KEY (chat_participant_id),
+  CONSTRAINT fk_chat_participant_dog_id
+  FOREIGN KEY (dog_id) REFERENCES dog(dog_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_chat_participant_chat_id
+  FOREIGN KEY (chat_id) REFERENCES chat(chat_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  UNIQUE (dog_id, chat_id)
+);
+
 CREATE TABLE puppals.message (
   message_id INT AUTO_INCREMENT,
   dog_id INT,
@@ -71,76 +86,61 @@ CREATE TABLE puppals.message (
   FOREIGN KEY (chat_id) REFERENCES chat(chat_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE puppals.dog_chat (
-  dog_chat_id INT AUTO_INCREMENT,
-  dog_id INT,
-  chat_id INT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  is_deleted TINYINT(1) DEFAULT 0 NOT NULL,
-  PRIMARY KEY (dog_chat_id),
-  CONSTRAINT fk_dog_chat_dog_id
-  FOREIGN KEY (dog_id) REFERENCES dog(dog_id) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_dog_chat_chat_id
-  FOREIGN KEY (chat_id) REFERENCES chat(chat_id) ON DELETE CASCADE ON UPDATE CASCADE,
-  UNIQUE (dog_id, chat_id)
-);
-
 INSERT INTO puppals.user (email, password, is_active)
 VALUES 
-  ('kelly.demo@gmail.com', '1234', '1'),
-  ('john.demo@gmail.com', '102030', '1'),
-  ('anna.demo@gmail.com', 'abcde', '1'),
-  ('brian.demo@gmail.com', 'qwer', '1'),
-  ('cindy.demo@gmail.com', 'asdf', '0'),
-  ('dennis.demo@gmail.com', 'mnbv', '0'),
-  ('emily.demo@gmail.com', 'trew', '1'),
-  ('frank.demo@gmail.com', '1235', '1'),
-  ('george.demo@gmail.com', '1212', '1'),
-  ('harry.demo@gmail.com', '0909', '1');
+  ('kelly.demo@gmail.com', '1234', 1),
+  ('john.demo@gmail.com', '102030', 1),
+  ('anna.demo@gmail.com', 'abcde', 1),
+  ('brian.demo@gmail.com', 'qwer', 1),
+  ('cindy.demo@gmail.com', 'asdf', 0),
+  ('dennis.demo@gmail.com', 'mnbv', 0),
+  ('emily.demo@gmail.com', 'trew', 1),
+  ('frank.demo@gmail.com', '1235', 1),
+  ('george.demo@gmail.com', '1212', 1),
+  ('harry.demo@gmail.com', '0909', 1);
 
 INSERT INTO puppals.dog
   (user_id, name, photo, breed, sex, date_of_birth, weight, postal_code, energy_level, dog_owner_first_name, profile_message, is_active)
 VALUES 
-  ('1', 'Buncha', 'www.photostoragedemo.com', 'Maltipoo', 'M','2016-01-01', '10', 'M5V2Y6', 'Low', 'Kelly','Hello there!', '1'),
-  ('2', 'Oreo', 'www.photostoragedemo.com', 'Husky-mix', 'F', '2010-01-01', '60', 'M6K1G4', 'Moderate', 'John', 'Hello there!', '1'),
-  ('2', 'Marika', 'www.photostoragedemo.com', 'German Sheppard', 'F', '2015-01-01', '60', 'M6K1G4', 'High', 'John', 'Hello there!', '1'),
-  ('2', 'Aspasia', 'www.photostoragedemo.com', 'Beagle-mix', 'F', '2016-05-01', '30', 'M5T2R8', 'Low', 'John', 'Hello there!', '1'),
-  ('3', 'Ziggy', 'www.photostoragedemo.com', 'Shih Tzu', 'F', '2017-05-01', '12', 'M6G2M9', 'Low', 'Anna', 'Hello there!', '1'),
-  ('4', 'Bentley', 'www.photostoragedemo.com', 'Australian Sheppard', 'M', '2022-12-01', '30', 'M5B2H6', 'High', 'Brian', 'Hello there!', '1'),
-  ('5', 'Mochi', 'www.photostoragedemo.com', 'Bichon', 'M', '2016-12-01', '15', 'M2N7E9', 'Moderate', 'Cindy', 'Hello there!', '0'),
-  ('6', 'Beckam', 'www.photostoragedemo.com', 'Yorkie', 'M', '2016-04-01', '10', 'M5J2X5', 'High', 'Dennis', 'Hello there!', '0'),
-  ('7', 'Mocha', 'www.photostoragedemo.com', 'Cokapoo', 'M', '2014-04-01', '30', 'M5V3L8', 'Low', 'Emily', 'Hello there!', '1'),
-  ('8', 'Noonchi', 'www.photostoragedemo.com', 'Malshihpoo', 'M', '2018-04-01', '16', 'M4W0A8', 'High', 'Frank', 'Hello there!', '1'),
-  ('9', 'Lola', 'www.photostoragedemo.com', 'Shihpoo', 'F', '2022-04-01', '12', 'M5A1L4', 'High', 'George', 'Hello there!', '1'),
-  ('10', 'Bailey', 'www.photostoragedemo.com', 'Yorkie', 'M', '2020-04-01', '10', 'M5R2P1', 'High', 'Harry', 'Hello there!', '1'), 
-  ('10', 'Brown', 'www.photostoragedemo.com', 'Husky', 'M', '2019-05-01', '40', 'M5RSP1', 'High', 'Harry', 'Hello there!', '1');
+  (1, 'Buncha', 'www.photostoragedemo.com', 'Maltipoo', 'M','2016-01-01', '10', 'M5V2Y6', 'Low', 'Kelly','Hello there!', 1),
+  (2, 'Oreo', 'www.photostoragedemo.com', 'Husky-mix', 'F', '2010-01-01', '60', 'M6K1G4', 'Moderate', 'John', 'Hello there!', 1),
+  (2, 'Marika', 'www.photostoragedemo.com', 'German Sheppard', 'F', '2015-01-01', '60', 'M6K1G4', 'High', 'John', 'Hello there!', 1),
+  (2, 'Aspasia', 'www.photostoragedemo.com', 'Beagle-mix', 'F', '2016-05-01', '30', 'M5T2R8', 'Low', 'John', 'Hello there!', 1),
+  (3, 'Ziggy', 'www.photostoragedemo.com', 'Shih Tzu', 'F', '2017-05-01', '12', 'M6G2M9', 'Low', 'Anna', 'Hello there!', 1),
+  (4, 'Bentley', 'www.photostoragedemo.com', 'Australian Sheppard', 'M', '2022-12-01', '30', 'M5B2H6', 'High', 'Brian', 'Hello there!', 1),
+  (5, 'Mochi', 'www.photostoragedemo.com', 'Bichon', 'M', '2016-12-01', '15', 'M2N7E9', 'Moderate', 'Cindy', 'Hello there!', 0),
+  (6, 'Beckam', 'www.photostoragedemo.com', 'Yorkie', 'M', '2016-04-01', '10', 'M5J2X5', 'High', 'Dennis', 'Hello there!', 0),
+  (7, 'Mocha', 'www.photostoragedemo.com', 'Cokapoo', 'M', '2014-04-01', '30', 'M5V3L8', 'Low', 'Emily', 'Hello there!', 1),
+  (8, 'Noonchi', 'www.photostoragedemo.com', 'Malshihpoo', 'M', '2018-04-01', '16', 'M4W0A8', 'High', 'Frank', 'Hello there!', 1),
+  (9, 'Lola', 'www.photostoragedemo.com', 'Shihpoo', 'F', '2022-04-01', '12', 'M5A1L4', 'High', 'George', 'Hello there!', 1),
+  (10, 'Bailey', 'www.photostoragedemo.com', 'Yorkie', 'M', '2020-04-01', '10', 'M5R2P1', 'High', 'Harry', 'Hello there!', 1), 
+  (10, 'Brown', 'www.photostoragedemo.com', 'Husky', 'M', '2019-05-01', '40', 'M5RSP1', 'High', 'Harry', 'Hello there!', 1);
 
 INSERT INTO puppals.follow (followee_dog_id, follower_dog_id)
 VALUES
-  ('1', '5'),
-  ('1', '6'),
-  ('1', '8'),
-  ('2', '1'),
-  ('2', '6'),
-  ('2', '5'),
-  ('3', '1'),
-  ('4', '1'),
-  ('5', '2'),
-  ('5', '3'),
-  ('5', '10'),
-  ('6', '1'),
-  ('6', '11'),
-  ('7', '11'),
-  ('7', '8'),
-  ('8', '2'),
-  ('8', '12'),
-  ('9', '13'),
-  ('9', '12'),
-  ('10', '4'),
-  ('11', '1'),
-  ('12', '10'),
-  ('13', '10');
+  (1, 5),
+  (1, 6),
+  (1, 8),
+  (2, 1),
+  (2, 6),
+  (2, 5),
+  (3, 1),
+  (4, 1),
+  (5, 2),
+  (5, 3),
+  (5, 10),
+  (6, 1),
+  (6, 11),
+  (7, 11),
+  (7, 8),
+  (8, 2),
+  (8, 12),
+  (9, 13),
+  (9, 12),
+  (10, 4),
+  (11, 1),
+  (12, 10),
+  (13, 10);
 
 INSERT INTO puppals.chat (chat_name)
 VALUES
@@ -149,65 +149,74 @@ VALUES
   ('Small doggos club'),
   ('Big Buddies');
 
+INSERT INTO puppals.chat_participant (dog_id, chat_id)
+VALUES
+  (11, 1),
+  (12, 1),
+  (3, 1),
+  (1, 2),
+  (5, 2),
+  (4, 3),
+  (10, 3);
+
 INSERT INTO puppals.message (dog_id, chat_id, content)
 VALUES
-  ('11', '1', 'hihi'),
-  ('12', '1', 'hello'),
-  ('3', '1', 'hi everyone'),
-  ('1', '2', 'Hi Ziggy'),
-  ('5', '2', 'Hi Buncha'),
-  ('4', '3', 'hi everyone'),
-  ('10', '3', 'hello there');
+  (11, 1, 'hihi'),
+  (12, 1, 'hello'),
+  (3, 1, 'hi everyone'),
+  (1, 2, 'Hi Ziggy'),
+  (5, 2, 'Hi Buncha'),
+  (4, 3, 'hi everyone'),
+  (10, 3, 'hello there');
 
-INSERT INTO puppals.dog_chat (dog_id, chat_id)
-VALUES
-  ('11', '1'),
-  ('12', '1'),
-  ('3', '1'),
-  ('1', '2'),
-  ('5', '2'),
-  ('4', '3'),
-  ('10', '3');
 
 -- Inserting Extra Data
 
-INSERT INTO puppals.user (email, password, is_active)
-VALUES ('dorothy.demo@gmail.com', 'mypassword', '1');
+INSERT INTO puppals.user (email, password)
+VALUES ('dorothy.demo@gmail.com', 'mypassword');
 
-INSERT INTO puppals.dog (user_id, name, photo, breed, sex, date_of_birth, weight, postal_code, energy_level, dog_owner_first_name, profile_message, is_active)
-VALUES ('11', 'Miska', 'www.photostoragedemo.com', 'Husky', 'M', '2015-05-01', '60', 'M5A1T7', 'Low', 'Dorothy', 'Hello there!', '1');
+INSERT INTO puppals.dog (user_id, name, photo, breed, sex, date_of_birth, weight, postal_code, energy_level, dog_owner_first_name, profile_message)
+VALUES (11, 'Miska', 'www.photostoragedemo.com', 'Husky', 'M', '2015-05-01', '60', 'M5A1T7', 'Low', 'Dorothy', 'Hello there!');
 
 INSERT INTO puppals.follow (followee_dog_id, follower_dog_id)
 VALUES
-  ('14', '5');
+  (14, 5);
 
 INSERT INTO puppals.chat (chat_name)
 VALUES
   ('Go Huskies');
 
+INSERT INTO puppals.chat_participant (dog_id, chat_id)
+VALUES
+  (14, 5),
+  (13, 5),
+  (10, 5);
+
 INSERT INTO puppals.message (dog_id, chat_id, content)
 VALUES
-  ('14', '5', 'Hello, My name is Miska'),
-  ('13', '5', 'Hello, Miska'),
-  ('10', '5', 'Whoops! I am not a Husky'),
-  ('13', '5', 'You are still welcomed'),
-  ('13', '5', 'abcde');
+  (14, 5, 'Hello, My name is Miska'),
+  (13, 5, 'Hello, Miska'),
+  (10, 5, 'Whoops! I am not a Husky'),
+  (13, 5, 'You are still welcomed'),
+  (13, 5, 'abcde');
 
-INSERT INTO puppals.dog_chat (dog_id, chat_id)
-VALUES
-  ('14', '5'),
-  ('13', '5'),
-  ('10', '5');
 
 -- Updating data
 
 UPDATE puppals.dog SET weight = '62' WHERE dog_id = 14;
 UPDATE puppals.chat SET chat_name = 'Gogogo Huskies' WHERE chat_id = 5;
 
-
 -- To deleted a message (Soft Delete)
 
-UPDATE puppals.message SET is_deleted = '1' WHERE message_id = 12;
+UPDATE puppals.message SET is_deleted = 1 WHERE message_id = 12;
+
+-- To delete a dog (Soft Delete)
+
+UPDATE puppals.dog SET is_deleted = 1 WHERE dog_id = 14;
+
+-- To leave a chat
+
+UPDATE puppals.chat_participant SET is_deleted = 1 WHERE chat_participant_id = 10;
 
 -- To display playdates by weight (between 10 - 20 lb)
 
@@ -278,7 +287,7 @@ GROUP BY d.dog_id, d.name
 ORDER BY COUNT(f.follower_dog_id) DESC
 LIMIT 1;
 
--- To find the heaviets dog
+-- To find the heaviest dog
 
 SELECT
   d.name AS "Dog Name",
@@ -286,28 +295,14 @@ SELECT
 FROM puppals.dog AS d
 WHERE d.weight = (SELECT MAX(weight) FROM puppals.dog);
 
--- To view a chat room and messages sent by a dog)
-
-SELECT 
-  c.chat_name AS "Chat Rooms", 
-  d.name AS "Dog Name",  
-  m.content AS "Message",  
-  m.created_at AS "Sent at"
-FROM puppals.chat AS c
-JOIN puppals.message AS m
-  ON c.chat_id = m.chat_id
-JOIN puppals.dog AS d
-  ON m.dog_id = d.dog_id
-WHERE c.chat_id = 5;
-
 -- To find the number of participants for each chat room (LEFT JOIN to display chats with 0 participants)
 
 SELECT 
   c.chat_name AS "Chat Name",
-  COUNT(dc.dog_id) AS "Number of Chat Participants"
+  COUNT(cp.dog_id) AS "Number of Chat Participants"
 FROM puppals.chat AS c
-LEFT JOIN puppals.dog_chat AS dc
-  ON dc.chat_id = c.chat_id
+LEFT JOIN puppals.chat_participant AS cp
+  ON cp.chat_id = c.chat_id
 GROUP BY c.chat_id, c.chat_name;
 
 -- To find the chat rooms with more than 2 messages
@@ -315,12 +310,12 @@ GROUP BY c.chat_id, c.chat_name;
 SELECT
   c.chat_name AS "Chat Name",
   COUNT(DISTINCT m.message_id) AS "Number of Messages",
-  COUNT(DISTINCT dc.dog_id) AS "Number of Chat Participants"
+  COUNT(DISTINCT cp.dog_id) AS "Number of Chat Participants"
 FROM puppals.chat AS c
 JOIN puppals.message AS m
   ON c.chat_id = m.chat_id
-JOIN puppals.dog_chat AS dc
-  ON c.chat_id = dc.chat_id
+JOIN puppals.chat_participant AS cp
+  ON c.chat_id = cp.chat_id
 GROUP BY c.chat_id, c.chat_name
 HAVING COUNT(DISTINCT m.message_id) > 2;
 
@@ -328,15 +323,18 @@ HAVING COUNT(DISTINCT m.message_id) > 2;
 
 SELECT
   c.chat_name AS "Chat Rooms",
-  d.name AS "Dog Name",
+  CASE
+    WHEN d.is_deleted = 1 THEN 'Deleted dog' -- when a dog is deleted, it shows "Deleted dog"
+    ELSE d.name
+  END AS "Dog Name",
   CASE
     WHEN m.is_deleted = 1 THEN 'Deleted message' -- when a message is deleted, it shows "Deleted message"
     ELSE m.content
   END AS "Message",
   m.created_at AS "Sent at",
-  dc.created_at AS "Joined Chat",
+  cp.created_at AS "Joined Chat",
   CASE
-    WHEN dc.is_deleted = 1 THEN dc.updated_at -- leaving a chat
+    WHEN cp.is_deleted = 1 OR d.is_deleted = 1 THEN cp.updated_at -- leaving a chat
     ELSE NULL
   END AS "Left Chat"
 FROM puppals.chat AS c
@@ -344,6 +342,5 @@ JOIN puppals.message AS m
   ON c.chat_id = m.chat_id
 JOIN puppals.dog AS d
   ON m.dog_id = d.dog_id
-JOIN puppals.dog_chat AS dc
-  ON dc.dog_id = d.dog_id AND dc.chat_id = c.chat_id
-WHERE c.chat_id = 5;
+JOIN puppals.chat_participant AS cp
+  ON cp.dog_id = d.dog_id AND cp.chat_id = c.chat_id;
