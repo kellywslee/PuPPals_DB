@@ -35,7 +35,8 @@ Relationships:
 
 ## Entity Relationship Diagram
 https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=sharing
-![image](https://user-images.githubusercontent.com/76071382/229327455-3f256c2a-7655-446c-bb9e-27bca26e1629.png)
+![image](https://user-images.githubusercontent.com/76071382/229621870-69786556-8711-46f1-855c-e8990850a5a3.png)
+
 
 ## Relational Model
 - **user** (user_id(pk), email, password, created_at, updated_at, is_active, is_deleted)
