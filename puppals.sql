@@ -344,3 +344,8 @@ JOIN puppals.dog AS d
   ON m.dog_id = d.dog_id
 JOIN puppals.chat_participant AS cp
   ON cp.dog_id = d.dog_id AND cp.chat_id = c.chat_id;
+
+-- Adding Admin user 
+
+ALTER TABLE puppals.user
+ADD COLUMN is_admin TINYINT(1) DEFAULT 0 NOT NULL;
