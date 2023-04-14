@@ -200,7 +200,6 @@ VALUES
   (13, 5, 'You are still welcomed'),
   (13, 5, 'abcde');
 
-
 -- Updating data
 
 UPDATE puppals.dog SET weight = '62' WHERE dog_id = 14;
