@@ -349,3 +349,4 @@ JOIN puppals.chat_participant AS cp
 ALTER TABLE puppals.user
 ADD COLUMN is_admin TINYINT(1) DEFAULT 0 NOT NULL;
 
+START TRANSACTION;
