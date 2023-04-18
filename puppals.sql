@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS puppals;
+
 CREATE DATABASE puppals;
 
 CREATE TABLE puppals.user (
@@ -102,19 +104,19 @@ VALUES
 INSERT INTO puppals.dog
   (user_id, name, photo, breed, sex, date_of_birth, weight, postal_code, energy_level, dog_owner_first_name, profile_message, is_active)
 VALUES 
-  (1, 'Buncha', 'www.photostoragedemo.com', 'Maltipoo', 'M','2016-01-01', '10', 'M5V2Y6', 'Low', 'Kelly','Hello there!', 1),
-  (2, 'Oreo', 'www.photostoragedemo.com', 'Husky-mix', 'F', '2010-01-01', '60', 'M6K1G4', 'Moderate', 'John', 'Hello there!', 1),
-  (2, 'Marika', 'www.photostoragedemo.com', 'German Sheppard', 'F', '2015-01-01', '60', 'M6K1G4', 'High', 'John', 'Hello there!', 1),
-  (2, 'Aspasia', 'www.photostoragedemo.com', 'Beagle-mix', 'F', '2016-05-01', '30', 'M5T2R8', 'Low', 'John', 'Hello there!', 1),
-  (3, 'Ziggy', 'www.photostoragedemo.com', 'Shih Tzu', 'F', '2017-05-01', '12', 'M6G2M9', 'Low', 'Anna', 'Hello there!', 1),
-  (4, 'Bentley', 'www.photostoragedemo.com', 'Australian Sheppard', 'M', '2022-12-01', '30', 'M5B2H6', 'High', 'Brian', 'Hello there!', 1),
-  (5, 'Mochi', 'www.photostoragedemo.com', 'Bichon', 'M', '2016-12-01', '15', 'M2N7E9', 'Moderate', 'Cindy', 'Hello there!', 0),
-  (6, 'Beckam', 'www.photostoragedemo.com', 'Yorkie', 'M', '2016-04-01', '10', 'M5J2X5', 'High', 'Dennis', 'Hello there!', 0),
-  (7, 'Mocha', 'www.photostoragedemo.com', 'Cokapoo', 'M', '2014-04-01', '30', 'M5V3L8', 'Low', 'Emily', 'Hello there!', 1),
-  (8, 'Noonchi', 'www.photostoragedemo.com', 'Malshihpoo', 'M', '2018-04-01', '16', 'M4W0A8', 'High', 'Frank', 'Hello there!', 1),
-  (9, 'Lola', 'www.photostoragedemo.com', 'Shihpoo', 'F', '2022-04-01', '12', 'M5A1L4', 'High', 'George', 'Hello there!', 1),
-  (10, 'Bailey', 'www.photostoragedemo.com', 'Yorkie', 'M', '2020-04-01', '10', 'M5R2P1', 'High', 'Harry', 'Hello there!', 1), 
-  (10, 'Brown', 'www.photostoragedemo.com', 'Husky', 'M', '2019-05-01', '40', 'M5RSP1', 'High', 'Harry', 'Hello there!', 1);
+  (1, 'Buncha', 'www.photostoragedemo.com', 'Maltipoo', 'M','2016-01-01', 10, 'M5V2Y6', 'Low', 'Kelly','Hello there!', 1),
+  (2, 'Oreo', 'www.photostoragedemo.com', 'Husky-mix', 'F', '2010-01-01', 60, 'M6K1G4', 'Moderate', 'John', 'Hello there!', 1),
+  (2, 'Marika', 'www.photostoragedemo.com', 'German Sheppard', 'F', '2015-01-01', 60, 'M6K1G4', 'High', 'John', 'Hello there!', 1),
+  (2, 'Aspasia', 'www.photostoragedemo.com', 'Beagle-mix', 'F', '2016-05-01', 30, 'M5T2R8', 'Low', 'John', 'Hello there!', 1),
+  (3, 'Ziggy', 'www.photostoragedemo.com', 'Shih Tzu', 'F', '2017-05-01', 12, 'M6G2M9', 'Low', 'Anna', 'Hello there!', 1),
+  (4, 'Bentley', 'www.photostoragedemo.com', 'Australian Sheppard', 'M', '2022-12-01', 30, 'M5B2H6', 'High', 'Brian', 'Hello there!', 1),
+  (5, 'Mochi', 'www.photostoragedemo.com', 'Bichon', 'M', '2016-12-01', 15, 'M2N7E9', 'Moderate', 'Cindy', 'Hello there!', 0),
+  (6, 'Beckam', 'www.photostoragedemo.com', 'Yorkie', 'M', '2016-04-01', 10, 'M5J2X5', 'High', 'Dennis', 'Hello there!', 0),
+  (7, 'Mocha', 'www.photostoragedemo.com', 'Cokapoo', 'M', '2014-04-01', 28, 'M5V3L8', 'Low', 'Emily', 'Hello there!', 1),
+  (8, 'Noonchi', 'www.photostoragedemo.com', 'Malshihpoo', 'M', '2018-04-01', 16, 'M4W0A8', 'High', 'Frank', 'Hello there!', 1),
+  (9, 'Lola', 'www.photostoragedemo.com', 'Shihpoo', 'F', '2022-04-01', 12, 'M5A1L4', 'High', 'George', 'Hello there!', 1),
+  (10, 'Bailey', 'www.photostoragedemo.com', 'Yorkie', 'M', '2020-04-01', 10, 'M5R2P1', 'High', 'Harry', 'Hello there!', 1), 
+  (10, 'Brown', 'www.photostoragedemo.com', 'Husky', 'M', '2019-05-01', 40, 'M5RSP1', 'High', 'Harry', 'Hello there!', 1);
 
 INSERT INTO puppals.follow (followee_dog_id, follower_dog_id)
 VALUES
@@ -176,7 +178,7 @@ INSERT INTO puppals.user (email, password)
 VALUES ('dorothy.demo@gmail.com', 'mypassword');
 
 INSERT INTO puppals.dog (user_id, name, photo, breed, sex, date_of_birth, weight, postal_code, energy_level, dog_owner_first_name, profile_message)
-VALUES (11, 'Miska', 'www.photostoragedemo.com', 'Husky', 'M', '2015-05-01', '60', 'M5A1T7', 'Low', 'Dorothy', 'Hello there!');
+VALUES (11, 'Miska', 'www.photostoragedemo.com', 'Husky', 'M', '2015-05-01', 60, 'M5A1T7', 'Low', 'Dorothy', 'Hello there!');
 
 INSERT INTO puppals.follow (followee_dog_id, follower_dog_id)
 VALUES
@@ -202,7 +204,7 @@ VALUES
 
 -- Updating data
 
-UPDATE puppals.dog SET weight = '62' WHERE dog_id = 14;
+UPDATE puppals.dog SET weight = 62 WHERE dog_id = 14;
 UPDATE puppals.chat SET chat_name = 'Gogogo Huskies' WHERE chat_id = 5;
 
 -- To deleted a message (Soft Delete)
@@ -349,4 +351,125 @@ JOIN puppals.chat_participant AS cp
 ALTER TABLE puppals.user
 ADD COLUMN is_admin TINYINT(1) DEFAULT 0 NOT NULL;
 
+-- Transaction
+
+START TRANSACTION;
+
+-- Insert a new user
+
+INSERT INTO puppals.user (email, password, is_active)
+VALUES ('sarah.demo@gmail.com', 'password123', 1);
+
+-- Get the user_id of the last inserted user
+
+SET @new_user_id = LAST_INSERT_ID();
+
+-- Insert a new dog for the new user (generating random DOB and weight)
+
+INSERT INTO puppals.dog
+  (user_id, name, photo, breed, sex, date_of_birth, weight, postal_code, energy_level, dog_owner_first_name, profile_message, is_active)
+VALUES 
+  (@new_user_id, 'Molly', 'www.photostoragedemo.com', 'Labrador', 'M', DATE_ADD(
+    DATE_SUB(CURDATE(), INTERVAL 15 YEAR),
+    INTERVAL FLOOR(RAND() * (15 * 365)) DAY
+  ), FLOOR(10 + RAND() * 91), 'M5S1A8', 'High', 'Sarah', 'Hello there!', 1);
+
+-- Get the dog_id of the last inserted dog
+
+SET @new_dog_id = LAST_INSERT_ID();
+
+COMMIT;
+
+-- Admin User
+
+DROP USER IF EXISTS puppalsAdmin;
+CREATE USER 'puppalsAdmin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'S7R0NGp4ssw0rd!';
+GRANT ALL PRIVILEGES ON *.* TO 'puppalsAdmin'@'localhost';
+flush privileges;
+SELECT User, Host FROM mysql.user WHERE User = 'puppalsAdmin' AND Host = 'localhost'; -- To check
+
+-- View: Active dogs with their owner's info
+
+CREATE VIEW puppals.active_dogs_with_owner AS
+SELECT 
+    d.name AS dog_name, 
+    d.photo,
+    d.breed,
+    d.sex,
+    d.date_of_birth,
+    d.weight,
+    d.postal_code,
+    d.energy_level,
+    d.dog_owner_first_name,
+    u.email AS owner_email
+FROM 
+    puppals.dog d
+JOIN 
+    puppals.user u ON d.user_id = u.user_id
+WHERE 
+    d.is_active = 1
+    AND d.is_deleted = 0;
+
+-- View: Dogs following my dog
+
+CREATE VIEW puppals.dogs_following_me AS
+SELECT
+    f.follower_dog_id,
+    d.name AS dog_name,
+    d.photo,
+    d.breed,
+    d.sex,
+    d.date_of_birth,
+    d.weight,
+    d.postal_code,
+    d.energy_level,
+    d.dog_owner_first_name,
+    u.email AS owner_email
+FROM
+    puppals.follow f
+JOIN
+    puppals.dog d ON f.follower_dog_id = d.dog_id
+JOIN
+    puppals.user u ON d.user_id = u.user_id
+WHERE
+    f.followee_dog_id = 1;
+
+-- View: Chat Room History (chatroom_id 5)
+
+CREATE VIEW puppals.chat_room_5_history AS
+SELECT
+  c.chat_name AS "Chat Rooms",
+  CASE
+    WHEN d.is_deleted = 1 THEN 'Deleted dog' -- when a dog is deleted, it shows "Deleted dog"
+    ELSE d.name
+  END AS "Dog Name",
+  CASE
+    WHEN m.is_deleted = 1 THEN 'Deleted message' -- when a message is deleted, it shows "Deleted message"
+    ELSE m.content
+  END AS "Message",
+  m.created_at AS "Sent at",
+  cp.created_at AS "Joined Chat",
+  CASE
+    WHEN cp.is_deleted = 1 OR d.is_deleted = 1 THEN cp.updated_at -- leaving a chat
+    ELSE NULL
+  END AS "Left Chat"
+FROM puppals.chat AS c
+JOIN puppals.message AS m
+  ON c.chat_id = m.chat_id
+JOIN puppals.dog AS d
+  ON m.dog_id = d.dog_id
+JOIN puppals.chat_participant AS cp
+  ON cp.dog_id = d.dog_id AND cp.chat_id = c.chat_id
+WHERE c.chat_id = 5;
+
+-- DESCRIBE AND SHOW CREATE TABLE
+
+DESCRIBE puppals.dog;
+SHOW CREATE TABLE puppals.dog;
+
+-- Indexes
+
+SHOW INDEXES FROM puppals.dog;
+EXPLAIN SELECT * FROM puppals.dog WHERE dog_id = 3; -- rows: 1, filtered: 100
+EXPLAIN SELECT * FROM puppals.dog IGNORE INDEX(PRIMARY) WHERE dog_id = 3; -- rows: 14, filtered: 7.69
 
