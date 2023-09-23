@@ -35,8 +35,7 @@ Relationships:
 
 ## Entity Relationship Diagram
 https://drive.google.com/file/d/1sFVd3-d_lQrg-h3j8s8BaAiOUOWf7GaC/view?usp=sharing
-![image](https://user-images.githubusercontent.com/76071382/231316753-d4d43152-0574-4deb-b871-226db1e5a6cc.png)
-
+![image](https://github.com/kellywslee/PupPals_DB/assets/76071382/9b4e3e89-c29a-435b-b707-98916438e6f9)
 
 
 ## Relational Model
